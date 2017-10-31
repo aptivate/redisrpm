@@ -18,4 +18,6 @@ $ VERSION=4.0.0 make redisrpm
 
 This should pop out a fresh new Redis RPM in the current working directory.
 
+You can pass arguments to Docker with `DOCKERARGS=--no-cache`, for example.
+
 Happy Hacking.

@@ -1,9 +1,9 @@
-FROM centos:7
+FROM centosruby
 
 ARG VERSION
 
-RUN yum -y update && yum -y upgrade
-RUN yum install -y ruby ruby-devel gcc make rpm-build rubygems git wget tcl
+RUN yum -y update
+RUN yum -y upgrade
 RUN gem install --no-ri --no-rdoc fpm
 
 COPY rpmify .

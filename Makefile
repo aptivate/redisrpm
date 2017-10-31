@@ -1,10 +1,18 @@
-IMAGENAME     := redisrpm
-CONTAINERNAME := redis
+RUBYIMAGENAME  := centosruby
+RUBYDOCKERFILE := centosruby.Dockerfile
 
-redisrpm:
-	@docker build -t redisrpm . --build-arg VERSION=$(VERSION)
-	@docker stop $(CONTAINERNAME) && docker rm $(CONTAINERNAME)
-	@docker run --name $(CONTAINERNAME) -t -d $(IMAGENAME)
-	@docker cp $(CONTAINERNAME):/redis-$(VERSION).el6.x86_64.rpm .
-	@docker stop $(CONTAINERNAME) && docker rm $(CONTAINERNAME)
+RPMDOCKERFILE    := redisrpm.Dockerfile
+RPMIMAGENAME     := redisrpm
+RPMCONTAINERNAME := redis
+
+centosruby:
+	@docker build -t $(RUBYIMAGENAME) -f $(RUBYDOCKERFILE) .
+.PHONY: centosruby
+
+redisrpm: #centosruby
+	@docker build -t $(RPMIMAGENAME) -f $(RPMDOCKERFILE) . --build-arg VERSION=$(VERSION) $(DOCKERARGS)
+	@docker stop $(RPMCONTAINERNAME) && docker rm $(RPMCONTAINERNAME)
+	@docker run --name $(RPMCONTAINERNAME) -t -d $(RPMIMAGENAME)
+	@docker cp $(RPMCONTAINERNAME):/redis-$(VERSION).el6.x86_64.rpm .
+	@docker stop $(RPMCONTAINERNAME) && docker rm $(RPMCONTAINERNAME)
 .PHONY: redisrpm

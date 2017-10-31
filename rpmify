@@ -3,16 +3,10 @@
 # This script packages Redis release as RHEL6/CentOS6 RPM using fpm.
 
 ### CONFIGURATION BEGINS ###
-
-MAINTAINER="<michael@michael-noll.com>"
+MAINTAINER="<lukem@aptivate.org>"
 INSTALL_BASE_DIR=/usr
-
-# Normally you do not need to change this variable
 DOWNLOAD_ROOT_URL=http://download.redis.io/releases
-
-# License download URL
 LICENSE_URL=https://raw.github.com/antirez/redis/unstable/COPYING
-
 ### CONFIGURATION ENDS ###
 
 SOFTWARE="redis"
@@ -85,11 +79,6 @@ fpm -s dir -t rpm -a all \
     -d "glibc" \
     -a "x86_64" \
     . || cleanup_and_exit $?
-
-echo "You can verify the proper creation of the RPM file with:"
-echo "  \$ rpm -qpi ${SOFTWARE}-*.rpm    # show package info"
-echo "  \$ rpm -qpR ${SOFTWARE}-*.rpm    # show package dependencies"
-echo "  \$ rpm -qpl ${SOFTWARE}-*.rpm    # show contents of package"
 
 # Clean up
 cleanup_and_exit $?
