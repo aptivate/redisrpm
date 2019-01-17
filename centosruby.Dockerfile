@@ -1,4 +1,4 @@
-FROM centos:6.9
+FROM centos:7
 
 RUN echo "8.8.8.8 example.com" >> /etc/hosts
 
