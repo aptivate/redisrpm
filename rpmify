@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# This script packages Redis release as RHEL6/CentOS6 RPM using fpm.
+# This script packages Redis release as RHEL7/CentOS7 RPM using fpm.
 
 ### CONFIGURATION BEGINS ###
 MAINTAINER="<lukem@aptivate.org>"
@@ -75,7 +75,7 @@ fpm -s dir -t rpm -a all \
     --vendor Redis.io \
     --url http://redis.io/ \
     --description "Redis is an advanced key-value store.\nIt is often referred to as a data structure server since keys can contain strings, hashes, lists, sets and sorted sets." \
-    -p $OLD_PWD/${SOFTWARE}-VERSION.el6.ARCH.rpm \
+    -p $OLD_PWD/${SOFTWARE}-VERSION.el7.ARCH.rpm \
     -d "glibc" \
     -a "x86_64" \
     . || cleanup_and_exit $?

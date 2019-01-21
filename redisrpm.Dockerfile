@@ -4,7 +4,7 @@ ARG VERSION
 
 RUN yum -y update
 RUN yum -y upgrade
-RUN gem install --no-ri --no-rdoc fpm
+RUN gem install fpm
 
 COPY rpmify .
 
